@@ -8,33 +8,66 @@
         body{
             background-color:rgb(50,76,121)
         }
-        #cards-container{
-            width:1200px;
+        #app{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #cards-container.big{
+            width:1100px;
             display:flex;
             flex-wrap: wrap;
             justify-content: space-around;
         }
-        .card{
-            padding-left:75px;
+        #cards-container.small{
+            width:320px;
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        #cards-container.big >.card{
+            padding-left:55px;
             padding-top:30px;
         }
+        #cards-container.small >.card{
+            padding-left:15px;
+            padding-top:20px;
+        } 
         .juzhong{
             display:flex;
             justify-content: center;
             align-items: center;
         }
+        .big>.card .card-content{
+            width:130px;
+        }
+        .small>.card>.card-content{
+            width:40px;
+        }
+        .card-content img{
+            width:100%
+        }
         </style>
 </head>
 <body>
     <div id=app>
-<div id="cards-container">
+<div>
+<div id="cards-container" :class="cradclass">
     <div v-for="card in cards" :key="cards.index" class="card">
-        <img :src=card.img>
+        <div class="card-content">
+            <img :src=card.img>
+        </div>
     </div>
 </div>
 <div class="juzhong">
     <button @click="chouka">点我十连</button>
 </div>
+<div class="juzhong">
+    <div>r:77% sr:20% ssr:3%</div>
+</div>
+</div>
+
+
         
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -42,17 +75,17 @@
 var app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello Vue!',
-    cards:[{img:'./pic/r/1.png'},
-    {img:'./pic/r/1.png'},
-    {img:'./pic/r/1.png'},
-    {img:'./pic/r/1.png'},
-    {img:'./pic/r/1.png'},
-    {img:'./pic/r/1.png'},
-    {img:'./pic/r/1.png'},
-    {img:'./pic/r/1.png'},
-    {img:'./pic/r/1.png'},
-    {img:'./pic/r/1.png'},]
+    cradclass: 'small',
+    cards:[{img:'./pic/0.png'},
+    {img:'./pic/0.png'},
+    {img:'./pic/0.png'},
+    {img:'./pic/0.png'},
+    {img:'./pic/0.png'},
+    {img:'./pic/0.png'},
+    {img:'./pic/0.png'},
+    {img:'./pic/0.png'},
+    {img:'./pic/0.png'},
+    {img:'./pic/0.png'}]
   },
   methods:{
     chouka:function(){
@@ -81,7 +114,18 @@ var app = new Vue({
             }
         }
         this.cards=temparr
+    },
+    fenbianlv:function(){
+        let w = document.documentElement.clientWidth;
+        if(w<=770){
+            this.cradclass="small"
+        }else{
+            this.cradclass="big"
+        }
     }
+  },
+  mounted:function(){
+    this.fenbianlv()
   }
 
 })
