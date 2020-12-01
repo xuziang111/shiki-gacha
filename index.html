@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        body{
+            background-color:rgb(50,76,121)
+        }
+        #cards-container{
+            width:1200px;
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .card{
+            padding-left:75px;
+            padding-top:30px;
+        }
+        .juzhong{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        </style>
+</head>
+<body>
+    <div id=app>
+<div id="cards-container">
+    <div v-for="card in cards" :key="cards.index" class="card">
+        <img :src=card.img>
+    </div>
+</div>
+<div class="juzhong">
+    <button @click="chouka">点我十连</button>
+</div>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    cards:[{img:'./pic/r/1.png'},
+    {img:'./pic/r/1.png'},
+    {img:'./pic/r/1.png'},
+    {img:'./pic/r/1.png'},
+    {img:'./pic/r/1.png'},
+    {img:'./pic/r/1.png'},
+    {img:'./pic/r/1.png'},
+    {img:'./pic/r/1.png'},
+    {img:'./pic/r/1.png'},
+    {img:'./pic/r/1.png'},]
+  },
+  methods:{
+    chouka:function(){
+        Math.random()*100
+        let tempcard = 0
+        let baodi = 0
+        let temparr=[]
+        for(let i=1;i<=10;i++){
+            if(baodi==0 && i==10){
+                tempcard = Math.random()*23+77
+            }else{
+                tempcard = Math.random()*100
+                console.log(tempcard)
+            }
+            if(tempcard<=77){
+                let tempcardd = './pic/r/'+Math.ceil(Math.random()*10)+'.png'
+                temparr.push({img:tempcardd})
+            }else if(tempcard>77 && tempcard<97){
+                let tempcardd = './pic/sr/'+Math.ceil(Math.random()*27)+'.png'
+                temparr.push({img:tempcardd})
+                baodi = 1
+            }else{
+                let tempcardd = './pic/ssr/'+Math.ceil(Math.random()*1)+'.png'
+                temparr.push({img:tempcardd})
+                baodi = 1
+            }
+        }
+        this.cards=temparr
+    }
+  }
+
+})
+    
+    
+    </script>
+</body>
+</html>
